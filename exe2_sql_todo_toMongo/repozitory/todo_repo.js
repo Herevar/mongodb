@@ -39,8 +39,14 @@ static async find(id) {
 
 static async findAll(){
     // return await todoses.find()
-    return (await ((await todoses.find()).toArray())).map(obj=> new TodoRecord(obj)) //chcemy zeby kazdy element był obiektem todorecord. Inaczej by było tablica i nie dało by sie na element zrobic od razu np.update tylko by trzeba było wyciągać kazdy element
+                //2x await bo to array sie rozwiazuje do promise'a
+                //const res = await todoses.find()
+                //const res2 = await res.toArray()
+                //return res2.map(obj=> new TodoRecor(obj))
+    return (await ((await todoses.find()).toArray())).map(obj=> new TodoRecord(obj)) //chcemy zeby kazdy element był obiektem todorecord. Inaczej by było tablica i nie dało by sie na element zrobic od razu np.update tylko by trzeba było wyciągać kazdy element - FOR AWAIT ..OF.. BO INACZEJ PAMIECIOZERNE (NP MILION POZYCJI WCZYTYWAC..)
     //zmieniamy w tablice - toarray() zeby nie zwracało jakiejś sieczki :P -> startowa.js (lekcyjka) 
+
+    //przy aktive record by trzeba; for await (const x of await Todorecord.findAll()){}
 }
 
 static async update(record) {

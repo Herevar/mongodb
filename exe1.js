@@ -39,7 +39,7 @@ const client = new MongoClient("mongodb://127.0.0.1:27017");
 
     const email = {$ne: ''} // injection notexist : ''
 
-    for await(const song of db.collection('songs2').find({
+    for await(const song of db.collection('songs2').find({ //FOR AWAIT ..OF.. NIE JEST PAMIECIOŻRENE GDY BAZA MA MILION POZYCJI
          email : String(email), //albo email + '' zeby rzutowało na tekst a i nie moglo wstrzyknac( tutaj pobrac wszystko))
          })){
             console.log(song)
