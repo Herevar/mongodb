@@ -39,7 +39,7 @@ static async find(id) {
 
 static async findAll(){
     // return await todoses.find()
-    return (await todoses.find()).toArray()
+    return (await ((await todoses.find()).toArray())).map(obj=> new TodoRecord(obj)) //chcemy zeby kazdy element był obiektem todorecord
     //zmieniamy w tablice - toarray() zeby nie zwracało jakiejś sieczki :P -> startowa.js (lekcyjka) 
 }
 
